@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARTEMIS Hub - Explore Insights</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 
+                        artemisTeal: '#2c897f', 
+                        artemisRed: '#d21f4c' 
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 flex h-screen text-gray-800 font-sans">
+
+    <!-- 1. Header/Navigation -->
+    <!--  <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer">
+                    <img src="Artemis-2026-white_small.jpg" alt="ARTEMIS Hub Logo" class="h-14 w-auto object-contain mix-blend-multiply">
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#" class="text-gray-600 hover:text-teal-600 font-medium transition-colors">About</a>
+                    <a href="#" class="text-gray-600 hover:text-teal-600 font-medium transition-colors">Research Themes</a>
+                    <a href="#" class="text-gray-600 hover:text-teal-600 font-medium transition-colors">Datasets</a>
+                    <a href="#" class="text-gray-600 hover:text-teal-600 font-medium transition-colors">Governance</a>
+                    <a href="#" class="text-gray-600 hover:text-teal-600 font-medium transition-colors">User Guide</a>
+                </nav>
+                
+                <div class="hidden md:flex items-center">
+                    <a href="#" class="inline-flex items-center justify-center px-6 py-2.5 border border-transparent text-sm font-medium rounded-md text-white bg-brand-teal hover:opacity-90 shadow-sm transition-opacity focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-teal">
+                        <i class="fa-solid fa-user-lock mr-2"></i> Login
+                    </a>
+                </div>
+
+                <div class="md:hidden flex items-center">
+                    <button class="text-gray-600 hover:text-navy-900 focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header> -->
+    
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r border-gray-200 p-4 flex flex-col justify-between">
+        <div>
+            <div class="mb-8 px-2">
+                <!-- <a href="explore.html" class="inline-flex items-center justify-center px-8 py-3.5 border border-transparent text-base font-semibold rounded-md text-white bg-brand-teal hover:bg-brand-teal/90 transition-colors shadow-lg shadow-brand-teal/30">
+                <img src="Artemis-2026-white_small.jpg" alt="ARTEMIS Logo" class="h-12 object-contain mb-2">
+                </a> -->
+                <span class="text-xs font-bold text-gray-400 tracking-wider uppercase">Explorer Beta</span>
+            </div>
+            <nav class="space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md font-medium">Home</a>
+                <a href="#" class="block px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md font-medium">Data access requests</a>
+                <div class="pt-4 pb-2 px-3 text-xs font-bold text-gray-400 uppercase tracking-wider">Saved Queries</div>
+                <a href="#" class="block px-3 py-2 text-artemisTeal bg-teal-50 rounded-md font-semibold border-l-4 border-artemisTeal">Untitled query</a>
+            </nav>
+        </div>
+        <div class="border-t pt-4">
+            <p class="text-xs text-gray-500 mb-4 px-2">Live data as of 30 October 2026</p>
+            <a href="#" class="block px-3 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-md">Help and support</a>
+            <a href="#" class="block px-3 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-md">Provide feedback</a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto p-8">
+
+        <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer">
+                    <a href="index.html">
+                    <img src="Artemis-2026-white_small.jpg" alt="ARTEMIS Hub Logo" class="h-14 w-auto object-contain mix-blend-multiply">
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#" class="text-gray-600 hover:text-teal-600 font-medium transition-colors">About</a>
+                    <a href="#" class="text-gray-600 hover:text-teal-600 font-medium transition-colors">Research Themes</a>
+                    <a href="#" class="text-gray-600 hover:text-teal-600 font-medium transition-colors">Datasets</a>
+                    <a href="#" class="text-gray-600 hover:text-teal-600 font-medium transition-colors">Governance</a>
+                    <a href="#" class="text-gray-600 hover:text-teal-600 font-medium transition-colors">User Guide</a>
+                </nav>
+                
+                <!-- Login Button -->
+                <div class="hidden md:flex items-center">
+                    <a href="#" class="inline-flex items-center justify-center px-6 py-2.5 border border-transparent text-sm font-medium rounded-md text-white bg-brand-teal hover:opacity-90 shadow-sm transition-opacity focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-teal">
+                        <i class="fa-solid fa-user-lock mr-2"></i> Login
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button class="text-gray-600 hover:text-navy-900 focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+        
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <div class="flex items-center gap-2 text-2xl font-bold text-gray-800">
+                <h2>Untitled query</h2>
+                <span class="text-sm bg-gray-200 text-gray-600 px-2 py-1 rounded-full ml-2">0 Filters</span>
+            </div>
+            <button class="bg-yellow-50 text-yellow-700 border border-yellow-200 px-4 py-2 rounded-md font-bold hover:bg-yellow-100 transition shadow-sm">
+                Request data access
+            </button>
+        </div>
+
+        <!-- Tabs -->
+        <div class="flex gap-8 border-b border-gray-200 mb-8 text-sm font-semibold text-gray-500">
+            <div class="pb-2 border-b-2 border-artemisTeal text-artemisTeal">SUMMARY</div>
+            <div class="pb-2 hover:text-gray-800 cursor-pointer">PARTICIPANTS</div>
+            <div class="pb-2 hover:text-gray-800 cursor-pointer">BIOSPECIMENS</div>
+            <div class="pb-2 hover:text-gray-800 cursor-pointer">MOLECULAR</div>
+        </div>
+
+        <!-- KPIs -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white p-5 border border-gray-200 rounded-lg shadow-sm">
+                <p class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-1">TOTAL PARTICIPANTS</p>
+                <p class="text-4xl font-bold">351 <span class="text-lg text-gray-400 font-medium">/3,687</span></p>
+                <div class="w-full bg-gray-200 h-1.5 mt-3 rounded-full overflow-hidden">
+                    <div class="bg-artemisTeal h-1.5 w-1/10"></div>
+                </div>
+            </div>
+            <div class="bg-white p-5 border border-gray-200 rounded-lg shadow-sm">
+                <p class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-1">TOTAL SAMPLES</p>
+                <p class="text-4xl font-bold">368 <span class="text-lg text-gray-400 font-medium">/14,050</span></p>
+                <div class="w-full bg-gray-200 h-1.5 mt-3 rounded-full overflow-hidden">
+                    <div class="bg-blue-500 h-1.5 w-1/12"></div>
+                </div>
+            </div>
+            <div class="bg-white p-5 border border-gray-200 rounded-lg shadow-sm">
+                <p class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-1">DATASETS AVAILABLE</p>
+                <p class="text-4xl font-bold">126 <span class="text-lg text-gray-400 font-medium">/203</span></p>
+                <div class="w-full bg-gray-200 h-1.5 mt-3 rounded-full overflow-hidden">
+                    <div class="bg-green-500 h-1.5 w-3/5"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Row 1 -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div class="bg-white p-5 border border-gray-200 rounded-lg shadow-sm">
+                <h3 class="text-sm font-bold text-gray-600 mb-4">Experimental Distribution</h3>
+                <div class="relative h-48">
+                    <canvas id="expChart"></canvas>
+                </div>
+            </div>
+            <div class="bg-white p-5 border border-gray-200 rounded-lg shadow-sm">
+                <h3 class="text-sm font-bold text-gray-600 mb-4">Age at Diagnosis Distribution</h3>
+                <div class="relative h-48">
+                    <canvas id="ageChart"></canvas>
+                </div>
+            </div>
+            <div class="bg-white p-5 border border-gray-200 rounded-lg shadow-sm">
+                <h3 class="text-sm font-bold text-gray-600 mb-4">Sex at Birth Distribution</h3>
+                <div class="relative h-48">
+                    <canvas id="sexChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Row -->
+        <div class="bg-white p-5 border border-gray-200 rounded-lg shadow-sm">
+            <h3 class="text-sm font-bold text-gray-600 mb-4">Top EOCRC Categories by Frequency</h3>
+            <table class="w-full text-left text-sm">
+                <thead>
+                    <tr class="text-gray-400 border-b">
+                        <th class="pb-2 font-medium">CANCER TYPE</th>
+                        <th class="pb-2 font-medium">COUNT</th>
+                        <th class="pb-2 font-medium">FREQ</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700">
+                    <tr class="border-b border-gray-50"><td class="py-2">Colorectal Adenocarcinoma</td><td class="py-2">144</td><td class="py-2">39.9%</td></tr>
+                    <tr class="border-b border-gray-50"><td class="py-2">Mucinous Adenocarcinoma</td><td class="py-2">45</td><td class="py-2">12.5%</td></tr>
+                    <!-- <tr class="border-b border-gray-50"><td class="py-2">Signet-Ring Cell Carcinoma</td><td class="py-2">29</td><td class="py-2">8.0%</td></tr> -->
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+
+    <script>
+        // Common Chart.js options
+        const chartOptions = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } };
+
+        // Experimental Distribution Bar Chart
+        new Chart(document.getElementById('expChart').getContext('2d'), {
+            type: 'bar',
+            data: { 
+                labels: ['WGS', 'WES', 'RNA-Seq'], 
+                datasets: [{ data: [150, 230, 90], backgroundColor: ['#3b82f6', '#10b981', '#f59e0b'] }] 
+            },
+            options: chartOptions
+        });
+
+        // Age at Diagnosis Bar Chart
+        new Chart(document.getElementById('ageChart').getContext('2d'), {
+            type: 'bar',
+            data: { 
+                labels: ['<30', '30-35', '36-40', '41-45', '46-49'], 
+                datasets: [{ data: [15, 40, 85, 120, 40], backgroundColor: '#8b5cf6' }] 
+            },
+            options: chartOptions
+        });
+
+        // Sex at Birth Doughnut Chart
+        new Chart(document.getElementById('sexChart').getContext('2d'), {
+            type: 'doughnut',
+            data: { 
+                labels: ['Male', 'Female'], 
+                datasets: [{ data: [180, 171], backgroundColor: ['#3b82f6', '#10b981'], borderWidth: 0 }] 
+            },
+            options: { ...chartOptions, plugins: { legend: { display: true, position: 'right' } }, cutout: '70%' }
+        });
+    </script>
+</body>
+</html>
